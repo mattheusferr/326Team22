@@ -19,10 +19,10 @@
   "keywords": [],
   "author": {
     "name": "TEAM 22",
-    "email": "https://github.com/mattheusferr/326Team22.git",
-    "url": "Mattheus Ferreira/mattheusferr@umass.edu/mattheusferr"
+    "email": "",
+    "url": "https://github.com/mattheusferr/326Team22.git"
   },
-  "contributors": [],
+  "contributors": ["Mattheus Ferreira/mattheusferr@umass.edu/mattheusferr", "Hari Iyer/hiyer@umass.edu/hari-iyer25", "Vedant Ajwani/vajwani@umass.edu/vedantajwani", "Jayani Tripathi/Jayanitripathi/jayanitripat@umass.edu"],
   "scripts": {
     "dev": "",
     "test": "",
