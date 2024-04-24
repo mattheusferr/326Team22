@@ -14,6 +14,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         // Success login:
         alert('Login successful! Welcome, ' + username);
         // Redirect after log in
-        window.location.href = '/dashboard.html'; 
+        window.location.href = '/home.html'; 
     }
 });
