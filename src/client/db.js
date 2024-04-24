@@ -1,4 +1,3 @@
-
 const db = new PouchDB('ustudy_db');
 
 //function saves the username used in login
