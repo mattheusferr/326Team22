@@ -26,10 +26,6 @@ body {
     flex-grow: 1;
 }
   
-.user {
-    flex-grow: 1;
-    justify-content: flex-end;
-}
   
 #login {
     background-color: #900; 

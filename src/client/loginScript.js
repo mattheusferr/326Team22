@@ -1,3 +1,5 @@
+import { saveUser } from './db.js';
+
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault(); 
     
@@ -9,6 +11,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         loginError.textContent = 'Both fields are required!';
         loginError.style.display = 'block';
     } else { 
+        //saves username to local db
+        saveUser(username);
         loginError.style.display = 'none';
         console.log('Logging in with:', username, password);
         // Success login:

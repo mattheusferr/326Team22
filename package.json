@@ -22,7 +22,12 @@
     "email": "",
     "url": "https://github.com/mattheusferr/UStudy---AHVM-Team-22-/tree/main"
   },
-  "contributors": ["Mattheus Ferreira/mattheusferr@umass.edu/mattheusferr", "Hari Iyer/hiyer@umass.edu/hari-iyer25", "Vedant Ajwani/vajwani@umass.edu/vedantajwani", "Jayani Tripathi/Jayanitripathi/jayanitripat@umass.edu"],
+  "contributors": [
+    "Mattheus Ferreira/mattheusferr@umass.edu/mattheusferr",
+    "Hari Iyer/hiyer@umass.edu/hari-iyer25",
+    "Vedant Ajwani/vajwani@umass.edu/vedantajwani",
+    "Jayani Tripathi/Jayanitripathi/jayanitripat@umass.edu"
+  ],
   "scripts": {
     "dev": "",
     "test": "",
@@ -35,5 +40,9 @@
     "html-validate": "^8.18.1",
     "http-server": "^14.1.1",
     "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "pouchdb": "^8.0.1",
+    "pouchdb-find": "^8.0.1"
   }
 }
