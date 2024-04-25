@@ -1,3 +1,5 @@
+import { getUser } from './db.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     var dropdown = document.querySelector('.dropdown');
     dropdown.addEventListener('click', function(event) {
@@ -15,13 +17,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener("DOMContentLoaded", function() {
     const grid = document.getElementById("grid");
-    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const daysOfWeek = [ "Timings","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const numberOfRows = 10;
+
+  for (let i = 0; i < numberOfRows; i++) {
+    const row = document.createElement("div");
+    row.classList.add("grid-row");
+
+    for (let j = 0; j < 8; j++) { 
+      const cell = document.createElement("div");
+      cell.classList.add("grid-item");
+      row.appendChild(cell);
+    }
+
+    grid.appendChild(row);
   
+
+    /*
     for (let i = 0; i < 12; i++) {
       const row = document.createElement("div");
       row.classList.add("grid-row");
   
-      // Add grid items for each day of the week
       daysOfWeek.forEach(day => {
         const cell = document.createElement("div");
         cell.classList.add("grid-item");
@@ -35,5 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   
       grid.appendChild(row);
-    }
-  });
+    } */
+  }
+});
+  

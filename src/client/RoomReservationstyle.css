@@ -10,6 +10,8 @@
     align-items: center;
     justify-content: center;
     background-color:  #900;
+    border: 1px solid black; 
+
   }
   
   .day-of-week {
@@ -19,4 +21,123 @@
   .grid-row:nth-child(even) .grid-item {
     background-color: green;
   }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+.navbar,
+.main-title,
+.user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #e0e0e0;
+}
+
+.navbar-item,
+.user-item {
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.main-title {
+    flex-grow: 1;
+}
+
+.user {
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.content-item {
+    background-color: #900;
+    color: white;
+    width: 30%;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.content-item h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-item {
+        width: 80%;
+        min-height: 200px;
+    }
+}
+
+
+.header-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #e0e0e0;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #e0e0e0;
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #d9d9d9;
+}
+
   
