@@ -31,6 +31,47 @@ body {
     justify-content: flex-end;
 }
 
+<<<<<<< HEAD
+=======
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.content-item {
+    background-color: #900;
+    color: white;
+    width: 30%;
+    min-height: 600px; /* Updated to elongate the box */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.content-item h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-item {
+        width: 80%;
+        min-height: 200px;
+    }
+}
+
+>>>>>>> origin/main
 .header-strip {
     display: flex;
     justify-content: space-between;
