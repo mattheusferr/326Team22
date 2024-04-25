@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UStudy</title>
+<link rel="stylesheet" href="homestyle.css">
+</head>
+<body>
+<div class="header-strip">
+    <div class="navbar">
+        <div class="navbar-item dropdown">
+            <button class="dropbtn">Navigation</button>
+            <div class="dropdown-content">
+                <a href="uHelp.html">UHelp</a>
+                <a href="forum.html">UForum</a>
+                <a href="login.html">Log Out</a>
+            </div>
+        </div>
+    </div>
+      
+    <div class="main-title">
+        <h1>UStudy</h1>
+     </div>
+      
+    <div class="user">
+        <div class="user-item">Student 1</div>
+    </div>
+</div>
+
+
+<div class="content">
+  <div class="content-item">Current Study Groups</div>
+  <div class="content-item">Room Reservations</div>
+  <div class="content-item">Upcoming Study Times</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
+<script type="module" src="db.js"></script>
+<script type="module" src="homescript.js"></script>
+</body>
+</html>

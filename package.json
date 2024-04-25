@@ -1,0 +1,48 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "license": "AGPL-version-3.0",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "keywords": [],
+  "author": {
+    "name": "AHVM",
+    "email": "",
+    "url": "https://github.com/mattheusferr/UStudy---AHVM-Team-22-/tree/main"
+  },
+  "contributors": [
+    "Mattheus Ferreira/mattheusferr@umass.edu/mattheusferr",
+    "Hari Iyer/hiyer@umass.edu/hari-iyer25",
+    "Vedant Ajwani/vajwani@umass.edu/vedantajwani",
+    "Jayani Tripathi/Jayanitripathi/jayanitripat@umass.edu"
+  ],
+  "scripts": {
+    "dev": "",
+    "test": "",
+    "milestone-01": "http-server src/docs/milestone-01 -p 3000 -c-1 -o -s",
+    "validate": "html-validate src/**/*.html",
+    "prettier": "prettier src —write",
+    "milestone-02": "http-server src/client -p 3000 -c-1 -o -s"
+  },
+  "devDependencies": {
+    "html-validate": "^8.18.1",
+    "http-server": "^14.1.1",
+    "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "pouchdb": "^8.0.1",
+    "pouchdb-find": "^8.0.1"
+  }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UStudy</title>
+    <link rel="stylesheet" href="forumstyle.css">
+</head>
+
+<body>
+    <div class="header-strip">
+        <div class="navbar">
+            <div class="navbar-item dropdown">
+                <button class="dropbtn">Navigation</button>
+                <div class="dropdown-content">
+                    <a href="home.html">Back to Home</a>
+                    <a href="uHelp.html">UHelp</a>
+                    <a href="login.html">Log Out</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-title">
+            <h1>UForum</h1>
+        </div>
+
+        <div class="user">
+            <div class="user-item">Student 1</div>
+        </div>
+    </div>
+    <div class="forum-container">
+        <div class="forum">
+            <div class="forum-topic">
+                <button class="accordion">Topic 1 Header with Dropdown</button>
+                <div class="panel">
+                    <p>Comment 1 for Topic 1</p>
+                    <p>Comment 2 for Topic 1</p>
+                </div>
+            </div>
+            <div class="forum-topic">
+                <button class="accordion">Topic 2 Header with Dropdown</button>
+                <div class="panel">
+                    <p>Comment 1 for Topic 2</p>
+                </div>
+            </div>
+        </div>
+        <div class="create-forum-post">
+            <h2>Create a New Forum Post</h2>
+            <form id="forum-post-form">
+                <input type="text" id="post-title" name="post-title" placeholder="Title" required>
+                <textarea id="post-content" name="post-content" placeholder="Content" rows="4" required></textarea>
+                <button type="submit" class="post-submit-btn">POST</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
+    <script type="module" src="db.js"></script>
+    <script type="module" src="forumscript.js"></script>
+
+</body>
+
+</html>
