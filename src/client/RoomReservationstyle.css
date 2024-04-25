@@ -1,6 +1,6 @@
 .grid {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(8, 1fr); /* Include an extra column for the day names */
     grid-auto-rows: 50px; /* Adjust height as needed */
     grid-gap: 1px; /* Adjust gap between grid items */
   }
@@ -9,17 +9,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: red;
+    background-color:  #900;
   }
   
-  /* Apply different styling for days of the week */
-  .grid-item:nth-child(-n+7) {
-    background-color: initial; /* Resets background color for days of the week */
-    font-weight: bold; /* Style for days of the week */
+  .day-of-week {
+    font-weight: bold;
   }
   
-  /* Define style for green-colored blocks */
-  .grid-item.green {
+  .grid-row:nth-child(even) .grid-item {
     background-color: green;
   }
   
