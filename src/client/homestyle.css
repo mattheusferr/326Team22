@@ -49,6 +49,21 @@ body {
     margin: 10px;
     border-radius: 10px;
 }
+
+.content-item {
+    background-color: #900;
+    color: white;
+    width: 30%; /* Keeps the width to 30% of its container */
+    min-height: 200px; /* Increases the minimum height */
+    display: flex;
+    flex-direction: column; /* Stack children elements vertically */
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px; /* Adds padding inside the box */
+    border-radius: 10px;
+}
+
   
 @media (max-width: 768px) {
     .content {
