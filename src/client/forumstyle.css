@@ -7,25 +7,28 @@ body {
     align-items: center;
     background-color: #f4f4f4;
 }
-  
-.navbar, .main-title, .user {
+
+.navbar,
+.main-title,
+.user {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     background-color: #e0e0e0;
 }
-  
-.navbar-item, .user-item {
+
+.navbar-item,
+.user-item {
     margin: 10px;
     padding: 10px;
     cursor: pointer;
 }
-  
+
 .main-title {
     flex-grow: 1;
 }
-  
+
 .user {
     flex-grow: 1;
     justify-content: flex-end;
@@ -36,7 +39,7 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: #e0e0e0; 
+    background-color: #e0e0e0;
 }
 
 .dropdown {
@@ -58,7 +61,7 @@ body {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -70,5 +73,88 @@ body {
     text-align: left;
 }
 
-.dropdown:hover .dropbtn {background-color: #d9d9d9;}
+.dropdown:hover .dropbtn {
+    background-color: #d9d9d9;
+}
 
+.forum {
+    flex: 1;
+    margin-right: 20px;
+    width: 100%;
+    padding-left: 30px;
+    margin-top: 30px;
+}
+
+
+.accordion {
+    background-color: #f4f4f4;
+    color: #900;
+    cursor: pointer;
+    padding: 18px;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin-bottom: 5px;
+    text-align: left;
+    max-width: 600px;
+    font-size: 25px
+}
+
+.panel {
+    background-color: white;
+    display: none;
+    overflow: hidden;
+    text-align: left;
+}
+
+.panel p {
+    color: #900;
+    padding: 10px 0;
+}
+
+.create-forum-post {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+    margin-left: auto;
+}
+
+#create-forum-post h2 {
+    margin-bottom: 15px;
+}
+
+#forum-post-form input[type="text"],
+#forum-post-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#forum-post-form button.post-submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #900;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#forum-post-form button.post-submit-btn:hover {
+    background-color: red;
+}
+
+.forum-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
