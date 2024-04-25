@@ -18,3 +18,13 @@ export function saveUser(username) {
 export function getUser() {
     return db.get('user_info');
 }
+
+export function deleteUser() {
+    db.get('user_info').then(function (doc) {
+        return db.remove(doc);
+    }).then(function () {
+        console.log("User deleted successfully!");
+    }).catch(function (err) {
+        console.error("Error deleting user:", err);
+    });
+}
