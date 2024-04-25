@@ -1,6 +1,3 @@
-import { getUser } from './db.js';
-
-//handles click event for nav dropdown
 document.addEventListener('DOMContentLoaded', function() {
     var dropdown = document.querySelector('.dropdown');
     dropdown.addEventListener('click', function(event) {
