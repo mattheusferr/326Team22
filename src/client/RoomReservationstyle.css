@@ -1,37 +1,29 @@
-.grid {
+
+#grid-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr); /* Include an extra column for the day names */
-    grid-auto-rows: 50px; /* Adjust height as needed */
-    grid-gap: 1px; /* Adjust gap between grid items */
+    grid-template-columns: repeat(7, 1fr); 
+    grid-template-rows: repeat(11, 1fr); 
+    gap: 5px;
+    width: 70vw; 
+    height: 70vh; 
+    margin: 0 auto; 
+    border: 1px solid #000; 
   }
   
   .grid-item {
+    background-color: #900; 
+    border: 1px solid #000; 
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color:  #900;
-    border: 1px solid black; 
-
   }
   
-  .day-of-week {
+  .day-header {
     font-weight: bold;
   }
   
-  .grid-row:nth-child(even) .grid-item {
-    background-color: green;
-  }
 
-  body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f4f4f4;
-}
-
+/*navigation */
 .navbar,
 .main-title,
 .user {

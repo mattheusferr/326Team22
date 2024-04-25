@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error retrieving user:', err);
     });
 });
-
+/*
 document.addEventListener("DOMContentLoaded", function() {
     const grid = document.getElementById("grid");
     const daysOfWeek = [ "Timings","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -31,6 +31,32 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     grid.appendChild(row);
+  }
+});
+*/
+
+document.addEventListener("DOMContentLoaded", function() {
+  const gridContainer = document.getElementById('grid-container');
+
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  daysOfWeek.forEach(day => {
+    const dayHeader = document.createElement('div');
+    dayHeader.textContent = day;
+    dayHeader.classList.add('grid-item', 'day-header');
+    gridContainer.appendChild(dayHeader);
+  });
+
+  for (let i = 0; i < 10 * 7; i++) {
+    const gridItem = document.createElement('div');
+    gridItem.classList.add('grid-item');
+    gridContainer.appendChild(gridItem);
+  }
+});
+
+
+
+
   
 
     /*
@@ -52,6 +78,5 @@ document.addEventListener("DOMContentLoaded", function() {
   
       grid.appendChild(row);
     } */
-  }
-});
+  
   
