@@ -31,8 +31,6 @@ body {
     justify-content: flex-end;
 }
 
-<<<<<<< HEAD
-=======
 .content {
     display: flex;
     justify-content: space-between;
@@ -71,7 +69,6 @@ body {
     }
 }
 
->>>>>>> origin/main
 .header-strip {
     display: flex;
     justify-content: space-between;
