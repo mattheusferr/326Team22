@@ -37,29 +37,38 @@ body {
     width: 80%;
     margin-top: 20px;
 }
-  
+
 .content-item {
     background-color: #900;
     color: white;
     width: 30%;
-    height: 150px; 
+    min-height: 600px; 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin: 10px;
+    padding: 20px;
     border-radius: 10px;
+    box-sizing: border-box;
 }
-  
+
+.content-item h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
     .content {
-      flex-direction: column;
-      align-items: center;
+        flex-direction: column;
+        align-items: center;
     }
-  
+
     .content-item {
-      width: 80%; 
+        width: 80%;
+        min-height: 200px;
     }
 }
+
   
 .header-strip {
     display: flex;
