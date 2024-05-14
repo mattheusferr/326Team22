@@ -1,4 +1,37 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
 
+h1 {
+    color: #333;
+}
+
+#schedule {
+    margin-top: 20px;
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+}
+
+.task {
+    margin-bottom: 10px;
+}
+
+.task-details {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.remove-btn {
+    color: red;
+    cursor: pointer;
+}
+
+
+
+/*
 #grid-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr); 
@@ -24,6 +57,8 @@
   
 
 /*navigation */
+
+
 .navbar,
 .main-title,
 .user {

@@ -28,3 +28,28 @@ export function deleteUser() {
         console.error("Error deleting user:", err);
     });
 }
+
+// db.js
+
+let tasks = [];
+
+export function addTask(task) {
+    return new Promise((resolve, reject) => {
+        task.id = tasks.length + 1;
+        tasks.push(task);
+        resolve(task);
+    });
+}
+
+export function getTasks() {
+    return new Promise((resolve, reject) => {
+        resolve(tasks);
+    });
+}
+
+export function deleteTask(taskId) {
+    return new Promise((resolve, reject) => {
+        tasks = tasks.filter(task => task.id !== taskId);
+        resolve();
+    });
+}
