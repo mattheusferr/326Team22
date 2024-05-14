@@ -1,4 +1,5 @@
 import { saveUser } from './db.js';
+import { saveUser } from './db.js';
 
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault(); 
@@ -11,13 +12,16 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         loginError.textContent = 'Both fields are required!';
         loginError.style.display = 'block';
     } else { 
-        //saves username to local db
-        saveUser(username);
-        loginError.style.display = 'none';
-        console.log('Logging in with:', username, password);
-        // Success login:
-        alert('Login successful! Welcome, ' + username);
-        // Redirect after log in
-        window.location.href = '/home.html'; 
+        saveUser(username)
+            .then(() => {
+                loginError.style.display = 'none';
+                console.log('Logging in with:', username, password);
+                alert('Login successful! Welcome, ' + username);
+                window.location.href = '/home.html';
+            })
+            .catch(err => {
+                loginError.textContent = 'Error saving user: ' + err;
+                loginError.style.display = 'block';
+            });
     }
 });
