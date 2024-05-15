@@ -1,50 +1,54 @@
 const db = new PouchDB('ustudy_db');
 
 //function saves the username used in login
-export async function saveUser(username) {
-    try {
-        const response = await fetch('http://localhost:3000/saveUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username })
+export function saveUser(username) {
+    const user = {
+        _id: 'user_info',
+        username: username
+    };
+    db.get('user_info')
+        .then(doc => {
+            user._rev = doc._rev;
+            return db.put(user);
+        })
+        .catch(err => {
+            if (err.status === 404) {
+                return db.put(user);
+            } else {
+                throw err;
+            }
+        })
+        .then(() => {
+            console.log("User saved successfully!");
+        })
+        .catch(err => {
+            console.error("Error saving user:", err);
         });
-        const data = await response.json();
-        if (data.error) {
-            throw new Error(data.error);
-        }
-        console.log("User saved successfully!");
-    } catch (err) {
-        console.error("Error saving user:", err);
-        throw err;
-    }
 }
 
-export async function getUser() {
-    try {
-        const response = await fetch('http://localhost:3000/getUser');
-        const user = await response.json();
-        return user;
-    } catch (err) {
-        console.error("Error retrieving user:", err);
-        throw err;
-    }
-}
-export async function deleteUser() {
-    try {
-        const response = await fetch('http://localhost:3000/deleteUser', {
-            method: 'DELETE'
+export function getUser() {
+    return db.get('user_info')
+        .catch(err => {
+            if (err.status === 404) {
+                return null;
+            } else {
+                throw err;
+            }
         });
-        const data = await response.json();
-        if (data.error) {
-            throw new Error(data.error);
-        }
-        console.log("User deleted successfully!");
-    } catch (err) {
-        console.error("Error deleting user:", err);
-        throw err;
-    }
+}
+
+// Function to delete the user data
+export function deleteUser() {
+    db.get('user_info')
+        .then(doc => {
+            return db.remove(doc);
+        })
+        .then(() => {
+            console.log("User deleted successfully!");
+        })
+        .catch(err => {
+            console.error("Error deleting user:", err);
+        });
 }
 
 // db.js
