@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Define the directory to serve static files from
-const staticDir = path.join(__dirname, 'src', 'client');
+const staticDir = path.join(__dirname);
 
 // Middleware to serve static files
 app.use(express.static(staticDir));
