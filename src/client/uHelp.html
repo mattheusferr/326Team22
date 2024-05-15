@@ -1,72 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
+import { getUser, deleteUser } from './db.js';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UStudy</title>
-    <link rel="stylesheet" href="uHelpstyle.css">
-</head>
+document.addEventListener('DOMContentLoaded', function() {
+    var dropdown = document.querySelector('.dropdown');
+    dropdown.addEventListener('click', function(event) {
+        var dropdownContent = this.querySelector('.dropdown-content');
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    });
 
-<body>
-    <div class="header-strip">
-        <div class="navbar">
-            <div class="navbar-item dropdown">
-                <button class="dropbtn">Navigation</button>
-                <div class="dropdown-content">
-                    <a href="home.html">Back to Home</a>
-                    <a href="forum.html">UForum</a>
-                    <a href="#" class="logout-link">Log Out</a>
-                    <a href="RoomReservation.html">Reserve a Room</a>
-                </div>
-            </div>
-        </div>
+    // Get username used in login to use for student name on top right of page.
+    getUser().then((user) => {
+        if (user) {
+            document.querySelector('.user-item').textContent = user.username;
+        } else {
+            console.log('No user found');
+        }
+    }).catch((err) => {
+        console.error('Error retrieving user:', err);
+    });
 
-        <div class="main-title">
-            <h1>UHelp</h1>
-        </div>
+    // Handle form visibility
+    document.getElementById('scheduleButton').addEventListener('click', function() {
+        document.getElementById('reservationForm').style.display = 'block';
+    });
 
-        <div class="user">
-            <div class="user-item">Student 1</div>
-        </div>
-    </div>
+    // Handle form submission for reservation
+    const reservationForm = document.getElementById('reservationForm');
+    if (reservationForm) {
+        reservationForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const className = document.getElementById('class').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
 
-    <div class="tutoring-schedule">
-        <h2>Schedule a tutoring session</h2>
-        <button id="scheduleButton">Reserve a time</button>
-        <form id="reservationForm" style="display: none;">
-            <label for="class">Class:</label>
-            <input type="text" id="class" name="class" required>
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+            if (className && date && time) {
+                try {
+                    const response = await fetch('/api/reserve', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ className, date, time }),
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert('Reservation successful');
+                        displayStudyTimes();
+                    } else {
+                        alert('Reservation failed: ' + result.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            } else {
+                alert('Please enter class, date, and time');
+            }
+        });
+    }
 
-    <div class="content">
-        <div class="content-item">
-            <h2>Upcoming SI Sessions</h2>
-            <div id="upcomingSiSessions"></div>
-            <p>CS326: May 1, 2024 - 2:00 PM</p>
-            <p>CS377: May 3, 2024 - 4:00 PM</p>
-        </div>
-        <div class="content-item">
-            <h2>Office Hours</h2>
-            <div id="officeHours"></div>
-            <p>Tim Richards: May 2, 2024 - 11:00 AM</p>
-            <p>Jamie Davila: May 4, 2024 - 1:00 PM</p>
-        </div>
-        <div class="content-item">
-            <h2>Tutoring</h2>
-            <div id="studyTimes"></div>
-        </div>
-    </div>
+    // Display study times
+    async function displayStudyTimes() {
+        try {
+            const response = await fetch('/api/study-times');
+            const studyTimes = await response.json();
+            const studyTimesContainer = document.getElementById('studyTimes');
+            studyTimesContainer.innerHTML = '';
+            studyTimes.forEach(st => {
+                const studyTimeElement = document.createElement('div');
+                studyTimeElement.textContent = `${st.className}: ${st.date} at ${st.time}`;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', async () => {
+                    console.log('Delete button clicked for ID:', st.id); // Log delete button click
+                    await deleteStudyTime(st.id);
+                    displayStudyTimes();
+                });
+                studyTimeElement.appendChild(deleteButton);
+                studyTimesContainer.appendChild(studyTimeElement);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
-    <script type="module" src="db.js"></script>
-    <script type="module" src="uHelpScript.js"></script>
-</body>
+    async function deleteStudyTime(id) {
+        try {
+            console.log('Sending delete request for ID:', id); // Log delete request
+            const response = await fetch(`/api/study-times/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                console.error('Delete request failed:', response.statusText); // Log response error
+            }
+            const result = await response.json();
+            console.log('Delete response:', result); // Log server response
+            if (response.ok) {
+                alert('Deletion successful');
+            } else {
+                alert('Deletion failed: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
-</html>
+    displayStudyTimes();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var logoutLink = document.querySelector('.logout-link');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            deleteUser();
+            alert("You have been logged out.");
+            window.location.href = '/login.html';
+        });
+    }
+});
