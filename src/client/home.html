@@ -1,51 +1,54 @@
-import { getUser, deleteUser } from './db.js';
+<!DOCTYPE html>
+<html lang="en">
 
-document.addEventListener('DOMContentLoaded', function() {
-    var dropdown = document.querySelector('.dropdown');
-    dropdown.addEventListener('click', function(event) {
-        var dropdownContent = this.querySelector('.dropdown-content');
-        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-    });
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UStudy</title>
+    <link rel="stylesheet" href="homestyle.css">
+</head>
 
-    // Get username used in login to use for student name on top right of page.
-    getUser().then((user) => {
-        if (user) {
-            document.querySelector('.user-item').textContent = user.username;
-        } else {
-            console.log('No user found');
-        }
-    }).catch((err) => {
-        console.error('Error retrieving user:', err);
-    });
+<body>
+    <div class="header-strip">
+        <div class="navbar">
+            <div class="navbar-item dropdown">
+                <button class="dropbtn">Navigation</button>
+                <div class="dropdown-content">
+                    <a href="uHelp.html">UHelp</a>
+                    <a href="forum.html">UForum</a>
+                    <a href="#" class="logout-link">Log Out</a>
+                    <a href="RoomReservation.html">Reserve a Room</a>
+                </div>
+            </div>
+        </div>
 
-    // Display upcoming study times on Home page
-    async function displayUpcomingStudyTimes() {
-        try {
-            const response = await fetch('/api/study-times');
-            const studyTimes = await response.json();
-            const upcomingStudyTimesContainer = document.getElementById('upcomingStudyTimes');
-            upcomingStudyTimesContainer.innerHTML = '';
-            studyTimes.forEach(st => {
-                const studyTimeElement = document.createElement('div');
-                studyTimeElement.textContent = `${st.className}: ${st.date} at ${st.time}`;
-                upcomingStudyTimesContainer.appendChild(studyTimeElement);
-            });
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
+        <div class="main-title">
+            <h1>UStudy</h1>
+        </div>
 
-    displayUpcomingStudyTimes();
-});
+        <div class="user">
+            <div class="user-item">Student 1</div>
+        </div>
+    </div>
 
-document.addEventListener('DOMContentLoaded', function() {
-    var logoutLink = document.querySelector('.logout-link');
-    if (logoutLink) {
-        logoutLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            deleteUser();
-            alert("You have been logged out.");
-            window.location.href = '/login.html';
-        });
-    }
-});
+    <div class="content">
+        <div class="content-item">
+            <h2>Current Study Groups</h2>
+            <div id="currentStudyGroups"></div>
+        </div>
+        <div class="content-item">
+            <h2>Room Reservations</h2>
+            <div id="roomReservations"></div>
+        </div>
+        <div class="content-item">
+            <h2>Upcoming Study Times</h2>
+            <div id="upcomingStudyTimes"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
+    <script type="module" src="db.js"></script>
+    <script type="module" src="homescript.js"></script>
+</body>
+
+</html>
