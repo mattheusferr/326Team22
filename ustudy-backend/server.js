@@ -1,5 +1,3 @@
-
-//LOGIN PAGE
 const express = require('express');
 const PouchDB = require('pouchdb-node');
 const bodyParser = require('body-parser');
@@ -49,9 +47,6 @@ app.delete('/deleteUser', async (req, res) => {
     }
 });
 
-
-
-// Endpoint to add a task
 app.post('/tasks', async (req, res) => {
     const { title, time } = req.body;
     if (!title || !time) {
@@ -72,7 +67,6 @@ app.post('/tasks', async (req, res) => {
     }
 });
 
-// Endpoint to get all tasks
 app.get('/tasks', async (req, res) => {
     try {
         const result = await db.allDocs({ include_docs: true });
@@ -83,7 +77,6 @@ app.get('/tasks', async (req, res) => {
     }
 });
 
-// Endpoint to delete a task
 app.delete('/tasks/:id', async (req, res) => {
     try {
         const task = await db.get(req.params.id);
@@ -94,9 +87,7 @@ app.delete('/tasks/:id', async (req, res) => {
     }
 });
 
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-

@@ -1,5 +1,4 @@
 import { saveUser } from './db.js';
-import { saveUser } from './db.js';
 
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault(); 
