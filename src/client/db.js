@@ -51,23 +51,25 @@ export async function deleteUser() {
 
 let tasks = [];
 
-export function addTask(task) {
-    return new Promise((resolve, reject) => {
-        task.id = tasks.length + 1;
-        tasks.push(task);
-        resolve(task);
-    });
-}
+export const getTasks = async () => {
+    const response = await fetch('/tasks');
+    return response.json();
+};
 
-export function getTasks() {
-    return new Promise((resolve, reject) => {
-        resolve(tasks);
+export const addTask = async (task) => {
+    const response = await fetch('/tasks', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(task),
     });
-}
+    return response.json();
+};
 
-export function deleteTask(taskId) {
-    return new Promise((resolve, reject) => {
-        tasks = tasks.filter(task => task.id !== taskId);
-        resolve();
+export const deleteTask = async (id) => {
+    const response = await fetch(`/tasks/${id}`, {
+        method: 'DELETE',
     });
-}
+    return response.json();
+};

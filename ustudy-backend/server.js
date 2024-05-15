@@ -49,7 +49,54 @@ app.delete('/deleteUser', async (req, res) => {
     }
 });
 
+
+
+// Endpoint to add a task
+app.post('/tasks', async (req, res) => {
+    const { title, time } = req.body;
+    if (!title || !time) {
+        return res.status(400).json({ error: 'Both title and time are required' });
+    }
+
+    const task = {
+        _id: new Date().toISOString(),
+        title,
+        time
+    };
+
+    try {
+        await db.put(task);
+        res.status(201).json({ message: 'Task added successfully', task });
+    } catch (error) {
+        res.status(500).json({ error: 'Error adding task', details: error });
+    }
+});
+
+// Endpoint to get all tasks
+app.get('/tasks', async (req, res) => {
+    try {
+        const result = await db.allDocs({ include_docs: true });
+        const tasks = result.rows.map(row => row.doc).filter(doc => doc.title && doc.time);
+        res.status(200).json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: 'Error retrieving tasks', details: error });
+    }
+});
+
+// Endpoint to delete a task
+app.delete('/tasks/:id', async (req, res) => {
+    try {
+        const task = await db.get(req.params.id);
+        await db.remove(task);
+        res.status(200).json({ message: 'Task deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error deleting task', details: error });
+    }
+});
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
