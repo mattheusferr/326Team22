@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3000; 
+const port = 3000;
 
 let studyTimes = [];
 
@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Define the directory to serve static files from
-const staticDir = path.join(__dirname); 
+const staticDir = path.join(__dirname, 'src', 'client');
+
 // Middleware to serve static files
 app.use(express.static(staticDir));
 
@@ -27,7 +28,6 @@ app.get('/', (req, res) => {
 // Endpoint to handle tutoring reservation (POST)
 app.post('/api/reserve', (req, res) => {
     const { className, date, time } = req.body;
-    console.log('Received Data:', { className, date, time }); // Log received data
     if (!className || !date || !time) {
         return res.status(400).json({ message: 'Class, date, and time are required' });
     }
@@ -44,9 +44,23 @@ app.get('/api/study-times', (req, res) => {
 // Endpoint to delete a specific study time (DELETE)
 app.delete('/api/study-times/:id', (req, res) => {
     const { id } = req.params;
-    console.log('Delete request received for ID:', id); // Log delete request
     studyTimes = studyTimes.filter(st => st.id !== parseInt(id));
     res.json({ message: 'Deletion successful' });
+});
+
+// Endpoint to update a specific study time (PUT)
+app.put('/api/study-times/:id', (req, res) => {
+    const { id } = req.params;
+    const { className, date, time } = req.body;
+    if (!className || !date || !time) {
+        return res.status(400).json({ message: 'Class, date, and time are required' });
+    }
+    const studyTimeIndex = studyTimes.findIndex(st => st.id === parseInt(id));
+    if (studyTimeIndex === -1) {
+        return res.status(404).json({ message: 'Reservation not found' });
+    }
+    studyTimes[studyTimeIndex] = { id: parseInt(id), className, date, time };
+    res.json({ message: 'Update successful', studyTime: studyTimes[studyTimeIndex] });
 });
 
 // Start the server
