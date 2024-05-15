@@ -29,7 +29,6 @@ export function deleteUser() {
     });
 }
 
-// db.js
 
 let tasks = [];
 
