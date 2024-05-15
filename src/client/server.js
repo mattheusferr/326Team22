@@ -1,72 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UStudy</title>
-    <link rel="stylesheet" href="uHelpstyle.css">
-</head>
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-<body>
-    <div class="header-strip">
-        <div class="navbar">
-            <div class="navbar-item dropdown">
-                <button class="dropbtn">Navigation</button>
-                <div class="dropdown-content">
-                    <a href="home.html">Back to Home</a>
-                    <a href="forum.html">UForum</a>
-                    <a href="#" class="logout-link">Log Out</a>
-                    <a href="RoomReservation.html">Reserve a Room</a>
-                </div>
-            </div>
-        </div>
+const app = express();
+const port = 3000;
 
-        <div class="main-title">
-            <h1>UHelp</h1>
-        </div>
+let studyTimes = [];
 
-        <div class="user">
-            <div class="user-item">Student 1</div>
-        </div>
-    </div>
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-    <div class="tutoring-schedule">
-        <h2>Schedule a tutoring session</h2>
-        <button id="scheduleButton">Reserve a time</button>
-        <form id="reservationForm" style="display: none;">
-            <label for="class">Class:</label>
-            <input type="text" id="class" name="class" required>
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+// Define the directory to serve static files from
+const staticDir = path.join(__dirname);
 
-    <div class="content">
-        <div class="content-item">
-            <h2>Upcoming SI Sessions</h2>
-            <div id="upcomingSiSessions"></div>
-            <p>CS326: May 1, 2024 - 2:00 PM</p>
-            <p>CS377: May 3, 2024 - 4:00 PM</p>
-        </div>
-        <div class="content-item">
-            <h2>Office Hours</h2>
-            <div id="officeHours"></div>
-            <p>Tim Richards: May 2, 2024 - 11:00 AM</p>
-            <p>Jamie Davila: May 4, 2024 - 1:00 PM</p>
-        </div>
-        <div class="content-item">
-            <h2>Tutoring</h2>
-            <div id="studyTimes"></div>
-        </div>
-    </div>
+// Middleware to serve static files
+app.use(express.static(staticDir));
 
-    <script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
-    <script type="module" src="db.js"></script>
-    <script type="module" src="uHelpScript.js"></script>
-</body>
+// Route for the root URL to serve login.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(staticDir, 'login.html'));
+});
 
-</html>
+// Endpoint to handle tutoring reservation (POST)
+app.post('/api/reserve', (req, res) => {
+    const { className, date, time } = req.body;
+    if (!className || !date || !time) {
+        return res.status(400).json({ message: 'Class, date, and time are required' });
+    }
+    const studyTime = { id: Date.now(), className, date, time };
+    studyTimes.push(studyTime);
+    res.json({ message: 'Reservation successful', studyTime });
+});
+
+// Endpoint to get all study times (GET)
+app.get('/api/study-times', (req, res) => {
+    res.json(studyTimes);
+});
+
+// Endpoint to delete a specific study time (DELETE)
+app.delete('/api/study-times/:id', (req, res) => {
+    const { id } = req.params;
+    studyTimes = studyTimes.filter(st => st.id !== parseInt(id));
+    res.json({ message: 'Deletion successful' });
+});
+
+// Endpoint to update a specific study time (PUT)
+app.put('/api/study-times/:id', (req, res) => {
+    const { id } = req.params;
+    const { className, date, time } = req.body;
+    if (!className || !date || !time) {
+        return res.status(400).json({ message: 'Class, date, and time are required' });
+    }
+    const studyTimeIndex = studyTimes.findIndex(st => st.id === parseInt(id));
+    if (studyTimeIndex === -1) {
+        return res.status(404).json({ message: 'Reservation not found' });
+    }
+    studyTimes[studyTimeIndex] = { id: parseInt(id), className, date, time };
+    res.json({ message: 'Update successful', studyTime: studyTimes[studyTimeIndex] });
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
