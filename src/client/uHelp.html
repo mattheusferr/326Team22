@@ -17,7 +17,7 @@
                     <a href="home.html">Back to Home</a>
                     <a href="forum.html">UForum</a>
                     <a href="#" class="logout-link">Log Out</a>
-                    <a href="Room Reservation">Reserve a Room</a>
+                    <a href="RoomReservation.html">Reserve a Room</a>
                 </div>
             </div>
         </div>
@@ -34,31 +34,35 @@
     <div class="tutoring-schedule">
         <h2>Schedule a tutoring session</h2>
         <button id="scheduleButton">Reserve a time</button>
+        <form id="reservationForm" style="display: none;">
+            <label for="class">Class:</label>
+            <input type="text" id="class" name="class" required>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+            <button type="submit">Submit</button>
+        </form>
     </div>
 
     <div class="content">
         <div class="content-item">
             <h2>Upcoming SI Sessions</h2>
-            <p>CS326: May 1, 2024 - 2:00 PM</p>
-            <p>CS377: May 3, 2024 - 4:00 PM</p>
+            <div id="upcomingSiSessions"></div>
         </div>
         <div class="content-item">
             <h2>Office Hours</h2>
-            <p>Tim Richards: May 2, 2024 - 11:00 AM</p>
-            <p>Jamie Davila: May 4, 2024 - 1:00 PM</p>
-
+            <div id="officeHours"></div>
         </div>
         <div class="content-item">
             <h2>Tutoring</h2>
-            <p>CS461 Tutor:May 5, 2024 - 3:00 PM</p>
-            <p>STAT515 Tutor:May 6, 2024 - 10:00 AM</p>
+            <div id="studyTimes"></div>
         </div>
-        </a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
     <script type="module" src="db.js"></script>
-    <script type="module" src="uHelpscript.js"></script>
+    <script type="module" src="uHelpScript.js"></script>
 </body>
 
 </html>
