@@ -17,19 +17,19 @@ The server will start and listen on port 3000 by default.
 
 ## API routes
 API: POST /saveUser
-Functionality: Saves the username to the database.
+Saves the username to the database.
 
 API: GET /getUser
-Functionality: Retrieves the saved user from the database.
+Retrieves the saved user from the database.
 
 API: DELETE /deleteUser
-Functionality: Deletes the saved user from the database.
+Deletes the saved user from the database.
 
 API: POST /tasks
-Functionality: Adds a new task to the database.
+Adds a new task to the database.
 
 API: GET /tasks
-Functionality: Retrieves all tasks from the database.
+Retrieves all tasks from the database.
 
 API: DELETE /tasks/:id
-Functionality: Deletes a task by ID.
+Deletes a task by ID.
