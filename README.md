@@ -33,3 +33,6 @@ Retrieves all tasks from the database.
 
 API: DELETE /tasks/:id
 Deletes a task by ID.
+
+API: PUT //api/study-times/:id'
+Edits current reservation in database
